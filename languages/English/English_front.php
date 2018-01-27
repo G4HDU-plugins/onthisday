@@ -64,69 +64,6 @@ define(OTD_H29,"An extended description of the event");
 define(OTD_H30,"Check for updates");
 define(OTD_H31,"Check for the author's web site for updates");
 
-define(OTD_A01,"On This Day Menu");
-define(OTD_A02,"Preferences");
-define(OTD_A03,"Entries");
-
-define(OTD_A04,"Settings saved");
-define(OTD_A05,"On This Day Menu Preferences");
-define(OTD_A06,"Show menu on empty days");
-define(OTD_A07,"Yes");
-define(OTD_A08,"No");
-define(OTD_A09,"Save Changes");
-define(OTD_A10,"Read Class");
-define(OTD_A11,"Editing events on");
-
-define(OTD_A12,"Title");
-define(OTD_A13,"Day");
-define(OTD_A14,"Month");
-define(OTD_A15,"Year");
-define(OTD_A16,"Full Text");
-define(OTD_A17,"Event Date");
-define(OTD_A18,"Maximum characters in menu");
-define(OTD_A19,"Date format");
-define(OTD_A20,"Import/Export");
-define(OTD_A21,"Add New");
-define(OTD_A22,"Edit this record");
-define(OTD_A23,"Delete this record");
-define(OTD_A24,"This day's Events");
-define(OTD_A25,"You have no events defined");
-define(OTD_A26,"You are about to delete the following record");
-define(OTD_A27,"Click OK to delete or cancel to exit.");
-define(OTD_A28,"OK");
-define(OTD_A29,"Cancel");
-define(OTD_A30,"Delete Entry");
-
-define(OTD_A31,"Day");
-define(OTD_A32,"Month");
-define(OTD_A33,"Year");
-
-
-define(OTD_A40,"Import Export Events");
-define(OTD_A41,"Available CSV and ICS files");
-define(OTD_A42,"Import");
-define(OTD_A43,"Export");
-define(OTD_A44,"CSV Data needs to be in the form <br />&nbsp;&nbsp;&nbsp;Brief Text (unformatted max length 200 characters)<br />&nbsp;&nbsp;&nbsp;Date (YYYY-MM-DD)<br />&nbsp;&nbsp;&nbsp;Full text. (With XHTML formatting max length 4096 characters)<br />The separator is , and each field should be surrounded by a double quote (\") ");
-define(OTD_A45,"Import files");
-define(OTD_A46,"Export File to CVS");
-define(OTD_A47,"Export file name");
-define(OTD_A48,"Select File");
-define(OTD_A49,"Imported");
-define(OTD_A50,"You must specify a file to import");
-define(OTD_A51,"Unable to open the file");
-define(OTD_A52,"You must specify a file to export to");
-define(OTD_A53,"Unable to write the file. Check the csv folder is writable (chmod 777 for example).");
-define(OTD_A54,"Read Me");
-define(OTD_A55,"Check for Updates");
-define(OTD_A56,"Submit class");
-define(OTD_A57,"Admin class");
-define(OTD_A58,"Allow show all");
-define(OTD_A59,"Saved");
-define(OTD_A60,"Not all necessary fields completed");
-define(OTD_A61,"An identical event exists");
-define(OTD_A62,"On this Day");
-define(OTD_A63,"Unable to create entry");
-define(OTD_A64,"Unable to save entry");
 
 define(OTD_001,"Manage Entries");
 define(OTD_002,"On This Day Menu");

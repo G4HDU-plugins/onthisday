@@ -22,11 +22,6 @@ define(OTD_MONTHLIST,",January,February,March,April,May,June,July,August,Septemb
 // This is the string displayed if "showifempty" is set:
 define(OTDLAN_DEFAULT, "Nothing much happened.");
 
-define(OTD_01, "You are not permitted to view this information");
-define(OTD_02, "Every year");
-define(OTD_03, "In");
-define(OTD_04, "On This Day");
-
 
 define(OTD_MONTHS,",January,February,March,April,May,June,July,August,September,October,November,December");
 
@@ -128,21 +123,7 @@ define(OTD_A62,"On this Day");
 define(OTD_A63,"Unable to create entry");
 define(OTD_A64,"Unable to save entry");
 
-define(OTD_001,"Manage Entries");
-define(OTD_002,"On This Day Menu");
-define(OTD_003,"New entry");
-define(OTD_004,"Edited Entry");
-define(OTD_005,"On this day entry updated by");
-define(OTD_006,"Entry title");
-define(OTD_007,"Entry was for");
-define(OTD_008,"New On this day Entry");
-define(OTD_009,"On this day Entry updated");
-define(OTD_010,"Found in");
-define(OTD_011,"Entry");
-define(OTD_012,"Occurs on");
-define(OTD_013,"Edit");
-define(OTD_014,"Delete");
-define(OTD_015,"Full Details");
+
 
 //define(OTD_P01,"Configure On This Day Menu");
 //define(OTD_P02,"Displays events that happened today.");

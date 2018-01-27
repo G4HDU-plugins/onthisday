@@ -21,3 +21,5 @@ define(OTD_MONTHLIST,",January,February,March,April,May,June,July,August,Septemb
 
 // This is the string displayed if "showifempty" is set:
 define(OTDLAN_DEFAULT, "Nothing much happened.");
+define(OTD_015,"Full Details");
+define(OTD_001,"Manage Entries");
