@@ -1,0 +1,7 @@
+post_title,post_content,post_type,tax_event_type
+0001-01-01,This is the earliest possible date for TDIH,tdih_event,
+0145-03-24,Wheels were high tech,tdih_event,Test
+1066-06-16,"Battle of hastings was ""around"" this time I guess; maybe.",tdih_event,
+1453-10-24,Warmest day of October somewhere in the world,tdih_event,
+2017-12-31,The end of the world as y'all know it,tdih_event,Doom
+1957-04-30,What a bad day this was.  Oh dear me yes.  It was very bad indeed.,tdih_event,Doom
