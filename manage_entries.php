@@ -243,7 +243,7 @@ if ($otd_obj->otd_submit)
         $otd_text .= "
 <table class='fborder' style='" . USER_WIDTH . "'>
 	<tr>
-		<td class='fcaption' >" . OTD_A01 . "</td>
+		<td class='fcaption' >" . OTD_04 . "</td>
 	</tr>
 	<tr>
 		<td class='forumheader2' >" . $otd_msg . "&nbsp;</td>
@@ -310,6 +310,6 @@ else
     $otd_text = "Not permitted";
 }
 
-$ns->tablerender(OTD_A01, $otd_text);
+$ns->tablerender(OTD_04, $otd_text);
 
 require_once(FOOTERF);
