@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="On This Day" lan="LAN_PLUGIN_OTD_NAME" version="2.0" date="2018-01-01" compatibility="2.0" installRequired="true" >
+	<author name="Barry Keal G4HDU" url="http://keal.me.uk" />
+	<summary>On this day menu</summary>
+	<description lan="LAN_PLUGIN_OTD_DESC">A menu and shortcode with a snippet of what happened on this day.</description>
+	<category>content</category>
+	<keywords>
+		<word>on this day</word>
+	</keywords>
+	<screenshots>
+		<image></image>
+	</screenshots>
+	<adminLinks>
+		<link url='admin_config.php' description='Configure On This Day' icon='images/otd_32.png' iconSmall='images/otd_16.png' icon128="images/otd_128.png" primary='true' >LAN_CONGIGURE</link>
+		<link url="admin_config.php?mode=options" description="Configure Settings" icon="manage" >Settings</link>
+	</adminLinks>
+	<siteLinks>
+		<link url="{e_PLUGIN}onthisday/index.php" perm='everyone' sef='index'>LAN_PLUGIN_OTD_LINK</link>
+	</siteLinks>
+	<pluginPrefs>
+		<pref name="blank_pref_1">1</pref>
+		<pref name="blank_pref_2">[more...]</pref>
+		<pref name="blank_pref_3">0</pref>
+	</pluginPrefs>
+	<userClasses>
+		<class name="blank_userclass" description="Blank Userclass Description" />		
+	</userClasses>
+	<extendedFields>
+		<field name="custom" type='EUF_TEXTAREA' default='0' active="true" />
+		<field name="custom2" type='EUF_ADDON' data="str" default='0' active="true" system="false" text="My Label" />
+	</extendedFields>
+	<mediaCategories>
+		<category type="image">Blank Images</category>
+	</mediaCategories>
+</e107Plugin>
