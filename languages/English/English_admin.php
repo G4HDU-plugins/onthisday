@@ -135,3 +135,12 @@ define(OTD_G02, "On This Day settings saved");
 define(OTD_G03, "Reward for posting an entry");
 define(OTD_G04, "Save Changes");
 define(OTD_G05, "Credit for creating an On This Day Entry");
+
+
+define(LAN_HELP_TITLE, "Help");
+define(LAN_HELP_BUG, "Bugs");
+define(LAN_HELP_LINK, "For help with this plugin");
+define(LAN_HELP_BUGS, "To report a bug in this plugin");
+
+
+

@@ -11,38 +11,14 @@
 if (!defined('e107_INIT')) { exit; }
 
 //v2.x spec.
-class _blank_frontpage // include plugin-folder in the name.
+class onthisday_frontpage // include plugin-folder in the name.
 {
 	// simple
 	function config()
 	{
 
-		$frontPage = array('page' => '{e_PLUGIN}_blank/_blank.php', 'title' => LAN_PLUGIN__BLANK_NAME);
+		$frontPage = array('page' => '{e_PLUGIN}onthisday/index.php', 'title' => OTDLAN_CAP);
 
 		return $frontPage;
 	}
-
-
-	
-	// multiple
-	/*function config()
-	{
-		$config = array();
-
-		$config['title']    = LAN_PLUGIN__BLANK_NAME;
-		$config['page']     = array(
-						0   => array('page' => '{e_PLUGIN}_blank/_blank.php', 'title'=>'Main Page'),
-		);
-
-		return $config;
-	}
-	*/
-
-
-
-
 }
-
-
-
-?>

@@ -16,7 +16,7 @@ if (!defined('e107_INIT'))
     exit;
 }
 define(OTDLAN_CAP, "On This Day ...");
-define(OTD_MORE,"[more]");
+define(OTD_MORE," ...[more]");
 define(OTD_MONTHLIST,",January,February,March,April,May,June,July,August,September,October,November,December");
 
 // This is the string displayed if "showifempty" is set:
