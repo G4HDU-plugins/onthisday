@@ -16,7 +16,7 @@ if (!defined('e107_INIT'))
     exit;
 }
 define(OTDLAN_CAP, "On This Day ...");
-define(OTD_MORE,"[more]");
+define(OTD_MORE," ...[more]");
 define(OTD_MONTHLIST,",January,February,March,April,May,June,July,August,September,October,November,December");
 
 // This is the string displayed if "showifempty" is set:
@@ -91,3 +91,37 @@ define(OTD_G02, "On This Day settings saved");
 define(OTD_G03, "Reward for posting an entry");
 define(OTD_G04, "Save Changes");
 define(OTD_G05, "Credit for creating an On This Day Entry");
+define(OTD_A04,"Settings saved");
+define(OTD_A05,"On This Day Menu Preferences");
+define(OTD_A06,"Show menu on empty days");
+define(OTD_A07,"Yes");
+define(OTD_A08,"No");
+define(OTD_A09,"Save Changes");
+define(OTD_A10,"Read Class");
+define(OTD_A11,"Editing events on");
+/** @todo clean up multiple land defns
+ * 
+ */ 
+define(OTD_A12,"Title");
+define(OTD_A13,"Day");
+define(OTD_A14,"Month");
+define(OTD_A15,"Year");
+define(OTD_A16,"Full Text");
+define(OTD_A17,"Event Date");
+define(OTD_A18,"Maximum characters in menu");
+define(OTD_A19,"Date format");
+define(OTD_A20,"Import/Export");
+define(OTD_A21,"Add New");
+define(OTD_A22,"Edit this record");
+define(OTD_A23,"Delete this record");
+define(OTD_A24,"This day's Events");
+define(OTD_A25,"You have no events defined");
+define(OTD_A26,"You are about to delete the following record");
+define(OTD_A27,"Click OK to delete or cancel to exit.");
+define(OTD_A28,"OK");
+define(OTD_A29,"Cancel");
+define(OTD_A30,"Delete Entry");
+
+define(OTD_A31,"Day");
+define(OTD_A32,"Month");
+define(OTD_A33,"Year");

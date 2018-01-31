@@ -636,7 +636,7 @@ class plugin_onthisday_admin_form_ui extends e_admin_form_ui
             return $types;
         }
 
-        return $frm->select('otd_day', $types, $curVal);
+        return $frm->select('otd_month', $types, $curVal);
     }
 
 }

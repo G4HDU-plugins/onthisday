@@ -19,25 +19,25 @@ if (!defined('e107_INIT')) { exit; }
 
 // v2.x Standard  - Simple mod-rewrite module. 
 
-class _blank_url // plugin-folder + '_url'
+class onthisday_url // plugin-folder + '_url'
 {
 	function config() 
 	{
 		$config = array();
 
 		$config['other'] = array(
-			'alias'         => '_blank',                            // default alias '_blank'. {alias} is substituted with this value below. Allows for customization within the admin area.
+			'alias'         => 'onthisday',                            // default alias '_blank'. {alias} is substituted with this value below. Allows for customization within the admin area.
 			'regex'			=> '^{alias}/?$', 						// matched against url, and if true, redirected to 'redirect' below.
 			'sef'			=> '{alias}', 							// used by e107::url(); to create a url from the db table.
-			'redirect'		=> '{e_PLUGIN}_blank/_blank.php', 		// file-path of what to load when the regex returns true.
+			'redirect'		=> '{e_PLUGIN}onthisday/index.php', 		// file-path of what to load when the regex returns true.
 
 		);
 
 
-		$config['index'] = array(
-			'regex'			=> '^_blank/?$', 						// matched against url, and if true, redirected to 'redirect' below.
-			'sef'			=> '_blank', 							// used by e107::url(); to create a url from the db table.
-			'redirect'		=> '{e_PLUGIN}_blank/blank.php', 		// file-path of what to load when the regex returns true.
+		$config['onthisday'] = array(
+			'regex'			=> '^onthisday/?$', 						// matched against url, and if true, redirected to 'redirect' below.
+			'sef'			=> 'onthisday', 							// used by e107::url(); to create a url from the db table.
+			'redirect'		=> '{e_PLUGIN}onthisday/index.php', 		// file-path of what to load when the regex returns true.
 
 		);
 

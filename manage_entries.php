@@ -32,7 +32,7 @@ if ($pref['wysiwyg'])
     $WYSIWYG = true;
 }
 require_once(HEADERF);
-if ($otd_obj->otd_submit)
+if ($otd_obj->canSubmit())
 {
     if (!defined('USER_WIDTH'))
     {
@@ -82,7 +82,8 @@ if ($otd_obj->otd_submit)
             $otd_row = $sql->db_Fetch();
             extract($otd_row);
             $otd_monthsel = $otd_month -1 ;
-            $otd_text = "<table class='fborder' style='" . USER_WIDTH . "' >
+            $otd_text = "
+        <table class='fborder' style='" . USER_WIDTH . "' >
 	<tr><td class='fcaption'>" . OTD_A30 . "</td></tr>
 	<tr><td class='fcaption'>" . OTD_A26 . "<br /><br /><strong>" . $tp->toHTML($otd_brief, false) . "</strong><br />
 	" . OTD_A31 . " $otd_day - " . OTD_A32 . " " . $otd_currentmonths[$otd_monthsel] . " - " . OTD_A33 . " $otd_year
@@ -243,7 +244,7 @@ if ($otd_obj->otd_submit)
         $otd_text .= "
 <table class='fborder' style='" . USER_WIDTH . "'>
 	<tr>
-		<td class='fcaption' >" . OTD_A01 . "</td>
+		<td class='fcaption' >" . OTD_04 . "</td>
 	</tr>
 	<tr>
 		<td class='forumheader2' >" . $otd_msg . "&nbsp;</td>
@@ -260,7 +261,7 @@ if ($otd_obj->otd_submit)
 	<tr>
 		<td class='fcaption' colspan='2'>" . OTD_A24 . " - <strong>$otd_currentday " . $otd_currentmonths[$otd_currentmonth] . "</strong></td>
 	</tr>";
-        if ($otd_obj->otd_admin)
+        if ($otd_obj->isAdmin())
         {
             // admin so get all
             $otd_where = "where otd_month='$otd_selmonth' and otd_day='$otd_currentday'";
@@ -310,6 +311,6 @@ else
     $otd_text = "Not permitted";
 }
 
-$ns->tablerender(OTD_A01, $otd_text);
+$ns->tablerender(OTD_04, $otd_text);
 
 require_once(FOOTERF);
