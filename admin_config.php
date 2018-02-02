@@ -362,10 +362,13 @@ class plugin_onthisday_admin_ui extends e_admin_ui
             'title' => OTD_A57,
             'type' => 'userclass',
             'data' => 'integer'),
+        /*    
         'otd_showall' => array(
             'title' => OTD_A58,
             'type' => 'boolean',
-            'data' => 'integer'));
+            'data' => 'integer')
+            */
+            );
 
     // optional
     public function init()

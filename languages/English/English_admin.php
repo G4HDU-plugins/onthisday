@@ -141,6 +141,8 @@ define(LAN_HELP_TITLE, "Help");
 define(LAN_HELP_BUG, "Bugs");
 define(LAN_HELP_LINK, "For help with this plugin");
 define(LAN_HELP_BUGS, "To report a bug in this plugin");
+define(LAN_HELP_VERSIONTEXT, "A newer version is available");
+define(LAN_HELP_VERSION, "Github");
 
 
 
