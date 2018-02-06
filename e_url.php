@@ -25,7 +25,7 @@ class onthisday_url // plugin-folder + '_url'
 	{
 		$config = array();
 
-		$config['other'] = array(
+		$config['index'] = array(
 			'alias'         => 'onthisday',                            // default alias '_blank'. {alias} is substituted with this value below. Allows for customization within the admin area.
 			'regex'			=> '^{alias}/?$', 						// matched against url, and if true, redirected to 'redirect' below.
 			'sef'			=> '{alias}', 							// used by e107::url(); to create a url from the db table.
@@ -33,14 +33,14 @@ class onthisday_url // plugin-folder + '_url'
 
 		);
 
-
-		$config['onthisday'] = array(
+/*
+		$config['index'] = array(
 			'regex'			=> '^onthisday/?$', 						// matched against url, and if true, redirected to 'redirect' below.
 			'sef'			=> 'onthisday', 							// used by e107::url(); to create a url from the db table.
 			'redirect'		=> '{e_PLUGIN}onthisday/index.php', 		// file-path of what to load when the regex returns true.
 
 		);
-
+*/
 		return $config;
 	}
 	
