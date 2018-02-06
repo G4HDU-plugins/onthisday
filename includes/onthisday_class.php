@@ -1,20 +1,15 @@
 <?php
-
-/*
-* +---------------------------------------------------------------+
-* |        On This Day Menu for e107 v7xx - by Father Barry
-* |
-* |        This module for the e107 .7+ website system
-* |        Copyright Barry Keal 2004-2009
-* |
-* |        Released under the terms and conditions of the
-* |        GNU General Public License (http://gnu.org).
-* |
-* +---------------------------------------------------------------+
+/**
+*  On This Day Plugin for the e107 Website System
+*
+* Copyright (C) 2008-2017 Barry Keal G4HDU (http://www.keal.me.uk)
+* Released under the terms and conditions of the
+* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+*
 */
-//include_lan(e_PLUGIN . "onthisday/languages/" . e_LANGUAGE . ".php");
+
 e107::lan('onthisday', false, true); //load front
-error_reporting(E_ALL);
+
 require_once (e_HANDLER . 'userclass_class.php');
 class onthisday
 {
@@ -340,14 +335,16 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
         // include_lan(e_PLUGIN . "onthisday/languages/" . e_LANGUAGE . ".php");
         $otd_thisday = date("d");
         $otd_thismonth = date("m");
-        $otd_text = "<ul>";
+        $otd_text = "<div id='otdMenuContainer' style='min-height:50px;max-height:".$this->prefs['otd_maxheight']."px;'><ul>";
         if ($this->db->select("onthisday", "*", "where otd_day='$otd_thisday' and otd_month='$otd_thismonth' order by otd_year", "nowhere", false))
         {
             while ($row = $this->db->db_Fetch())
             {
-                $otd_text .= "<li>" . $this->tp->html_truncate($this->tp->toHTML($row['otd_brief'], false, "no_make_clickable emotes_off"), 20, OTD_MORE) . "</li>";
+                $otd_text .= "<li>" . $this->tp->html_truncate($this->tp->toHTML($row['otd_brief'], false, "no_make_clickable emotes_off"), $this->prefs['otd_maxlength'], OTD_MORE) . "</li>";
             }
+              $otd_text .= "</ul></diV>";
             $otd_text .= "<div style='text-align:center'><a href='" . e_PLUGIN . "onthisday/index.php'>" . OTD_015 . "</a></div>";
+       
         } else
         {
 
@@ -358,7 +355,7 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
             // allowed to submit so display link
             $otd_text .= "<div style='text-align:center;'><a href='" . e_PLUGIN . "onthisday/manage_entries.php'>" . OTD_001 . "</a></div>";
         }
-        $otd_text .= "</ul>";
+       
         $cache_data = $this->ns->tablerender(OTDLAN_CAP, $otd_text, 'otdmenu', true); // Render the menu
         return $cache_data;
     }

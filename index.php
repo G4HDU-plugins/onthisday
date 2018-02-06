@@ -14,7 +14,7 @@
 */
 
 require_once ("../../class2.php");
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 e107::lan('onthisday', false, true); // load English front
 
 
@@ -26,7 +26,7 @@ if (!is_object($otd_obj))
 {
 
     require_once (e_PLUGIN . 'onthisday/includes/onthisday_class.php');
-       
+
     $otd_obj = new onthisday;
 }
 
@@ -36,11 +36,6 @@ $ns->tablerender(e_PAGETITLE, $text); // Render the page
 require_once (FOOTERF);
 exit;
 // include the appropriate language file, if possible
-
-
-
-
-
 
 
 $captiondate = $otd_thisday . ' ' . $otd_currentmonth[$otd_thismonth];
