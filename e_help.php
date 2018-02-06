@@ -1,6 +1,13 @@
 <?php
-
-if (!defined(''))
+/**
+*  Help Plugin for the e107 Website System
+*
+* Copyright (C) 2008-2018 Barry Keal G4HDU (http://www.keal.me.uk)
+* Released under the terms and conditions of the
+* GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+*
+*/
+if (!defined('LAN_HELP_TITLE'))
 {
     define(LAN_HELP_TITLE, "Help");
     define(LAN_HELP_BUG, "Bugs");
@@ -11,21 +18,43 @@ if (!defined(''))
 
 }
 $helpObj = new eversion();
-$helplink_text=$helpObj->runHelp();
+$helplink_text = $helpObj->runHelp();
 $ns->tablerender(LAN_HELP_TITLE, $helplink_text, 'hduhelp');
+
+/**
+ * eversion
+ * 
+ * @package   
+ * @author OnThisDay
+ * @copyright Father Barry
+ * @version 2018
+ * @access public
+ */
 class eversion
 {
+    
+
+    /**
+     * eversion::__construct()
+     * 
+     * @return
+     */
     function __construct()
     {
+        // Get the folder name of the current plugin which should match the plugin name
         $this->plugname = basename(__dir__ );
         $this->name = "e107:plugins:" . $this->plugname;
-        $this->thisDay = date('z') + 3;
+        $this->thisDay = date('z');
         $this->lastRemoteCheck = e107::pref($this->plugname, 'lastRemoteCheck');
-   //     print_a($this->thisDay);
-   //     print_a($this->lastRemoteCheck);
+
         $this->localVersion = e107::pref($this->plugname, 'localVersion');
         $this->remoteVersion = e107::pref($this->plugname, 'remoteVersion');
     }
+    /**
+     * eversion::runHelp()
+     * 
+     * @return
+     */
     public function runHelp()
     {
         $this->getLocal();
@@ -42,28 +71,39 @@ class eversion
         if ($this->result === 1)
         {
             $helplink_text .= $this->buttonVersion();
-
         }
         $helplink_text .= "</div>";
         return $helplink_text;
     }
+    /**
+     * eversion::getRemote()
+     * 
+     * @return
+     */
     private function getRemote()
     {
         $remoteFile = file_get_contents('https://raw.githubusercontent.com/G4HDU-plugins/' . $this->plugname . '/master/plugin.xml');
         $remotePosn = strpos($remoteFile, 'version="', 40) + 9;
         $remoteEnding = strpos($remoteFile, "\"", $remotePosn);
         $this->remoteVersion = substr($remoteFile, $remotePosn, $remoteEnding - $remotePosn);
-        //    print_a($this->remoteVersion);
     }
+    /**
+     * eversion::getLocal()
+     * 
+     * @return
+     */
     private function getLocal()
     {
         $localFile = file_get_contents('plugin.xml');
         $localPosn = strpos($localFile, 'version="', 40) + 9;
         $localEnding = strpos($localFile, "\"", $localPosn);
         $this->localVersion = substr($localFile, $localPosn, $localEnding - $localPosn);
-
-
     }
+    /**
+     * eversion::saveSettings()
+     * 
+     * @return
+     */
     private function saveSettings()
     {
         $settings = e107::getConfig($this->plugname);
@@ -72,6 +112,11 @@ class eversion
         $settings->setPref('remoteVersion', $this->remoteVersion);
         $settings->save(false, true, false);
     }
+    /**
+     * eversion::buttonHelp()
+     * 
+     * @return
+     */
     private function buttonHelp()
     {
         $retval = LAN_HELP_LINK . "<br>
@@ -82,6 +127,11 @@ class eversion
     </a>";
         return $retval;
     }
+    /**
+     * eversion::buttonBugs()
+     * 
+     * @return
+     */
     private function buttonBugs()
     {
         $retval = "<br><br>" . LAN_HELP_BUGS . "<br>
@@ -92,6 +142,11 @@ class eversion
     </a>";
         return $retval;
     }
+    /**
+     * eversion::buttonVersion()
+     * 
+     * @return
+     */
     private function buttonVersion()
     {
         $retval = "<br><br>" . LAN_HELP_VERSIONTEXT . "<br>
@@ -102,5 +157,4 @@ class eversion
     </a>";
         return $retval;
     }
-
 }

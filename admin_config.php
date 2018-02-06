@@ -349,6 +349,10 @@ class plugin_onthisday_admin_ui extends e_admin_ui
             'title' => OTD_A18,
             'type' => 'number',
             'data' => 'integer'),
+        'otd_maxheight' => array(
+            'title' => OTD_A65,
+            'type' => 'number',
+            'data' => 'integer'),
         'otd_readclass' => array(
             'title' => OTD_A10,
             'help' => OTD_H03,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="On This Day" lan="LAN_PLUGIN_OTD_NAME" version="2.0.1" date="2018-01-01" compatibility="2.0" installRequired="true" >
+<e107Plugin name="On This Day" lan="LAN_PLUGIN_OTD_NAME" version="2.0.3" date="2018-01-01" compatibility="2.0" installRequired="true" >
 	<author name="Barry Keal G4HDU" url="http://keal.me.uk" />
 	<summary>On this day menu</summary>
 	<description lan="LAN_PLUGIN_OTD_DESC">A menu and shortcode with a snippet of what happened on this day.</description>

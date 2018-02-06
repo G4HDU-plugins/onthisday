@@ -1,3 +1,8 @@
+#otdMenuContainer{
+    display: inline-block;
+    width: 100%;
+    overflow-y:auto;
+    }
 .otdLogoCell{
     text-align:center;    
 }
