@@ -173,7 +173,7 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
     }
     function otd_calendar($month = 1, $day = 1)
     {
-        global $sql;
+       // global $sql;
         $otd_onthisday = (int)date("d");
         $otd_onthismonth = (int)date("m");
         $selmonth = (int)$month;
@@ -186,9 +186,9 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
             // not admin so just get mine
             $otd_where = "where otd_month='{$month}' and otd_poster='" . USERID . "'";
         }
-        $sql->db_Select("onthisday", "otd_day", "$otd_where", "nowhere", false);
+        $this->db->select("onthisday", "otd_day", "$otd_where", "nowhere", false);
         $otd_activedays = array();
-        while ($otd_row = $sql->db_Fetch())
+        while ($otd_row = $this->db->fetch())
         {
             $otd_activedays[] = $otd_row['otd_day'];
         } // while
@@ -215,7 +215,7 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
         {
             $text .= "
 	<tr>
-		<td class='forumheader2'><a href='" . e_SELF . "?show.0." . $otd_prev . ".$day'>&lt;</a></td>";
+		<td class='forumheader2'><a href='" . e_SELF . "?show.0." . $otd_prev . ".$day'><i class='fa fa-angle-left fa-2x' aria-hidden='true'></i></a></td>";
         } else
         {
             $text .= "
@@ -227,7 +227,7 @@ where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,ot
         if ($month < 12)
         {
             $text .= "
-		<td class='forumheader2'><a href='" . e_SELF . "?show.0." . $otd_next . ".$day'>&gt;</a></td>";
+		<td class='forumheader2'><a href='" . e_SELF . "?show.0." . $otd_next . ".$day'><i class='fa fa-angle-right fa-2x' aria-hidden='true'></i></a></td>";
         } else
         {
             $text .= "

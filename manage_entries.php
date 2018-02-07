@@ -18,6 +18,7 @@ if (!defined('e107_INIT'))
     exit;
 }
 e107::lan('onthisday',false, true);
+        e107::css('onthisday', 'css/onthisday.css'); // load css file
 
 if (!is_object($otd_obj))
 {
@@ -32,6 +33,7 @@ if ($pref['wysiwyg'])
     $WYSIWYG = true;
 }
 require_once(HEADERF);
+$otd_form = e107::getForm(); 
 if ($otd_obj->canSubmit())
 {
     if (!defined('USER_WIDTH'))
@@ -83,16 +85,19 @@ if ($otd_obj->canSubmit())
             extract($otd_row);
             $otd_monthsel = $otd_month -1 ;
             $otd_text = "
-        <table class='fborder' style='" . USER_WIDTH . "' >
-	<tr><td class='fcaption'>" . OTD_A30 . "</td></tr>
-	<tr><td class='fcaption'>" . OTD_A26 . "<br /><br /><strong>" . $tp->toHTML($otd_brief, false) . "</strong><br />
+<table class='fborder' style='" . USER_WIDTH . "' >
+	<tr>
+        <td class='fcaption'>" . OTD_A30 . "</td>
+    </tr>
+	<tr>
+        <td class='fcaption'>" . OTD_A26 . "<br /><br /><strong>" . $tp->toHTML($otd_brief, false) . "</strong><br />
 	" . OTD_A31 . " $otd_day - " . OTD_A32 . " " . $otd_currentmonths[$otd_monthsel] . " - " . OTD_A33 . " $otd_year
 	<br /><br />" . OTD_A27 . "<br />
 	<a href='" . e_SELF . "?dodel.$otd_id.$otd_currentmonth.$otd_currentday' >" . OTD_A28 . "</a>&nbsp;&nbsp;&nbsp
 	<a href='" . e_SELF . "?show.$otd_id.$otd_currentmonth.$otd_currentday' >" . OTD_A29 . "</a>
-	</td></tr>
-
-	</table>";
+	   </td>
+    </tr>
+</table>";
         }
     }
     if ($otd_action == "save" && intval($_POST['otd_id']) == 0)
@@ -185,6 +190,11 @@ if ($otd_obj->canSubmit())
                 extract($otd_row);
             }
         }
+        $OTD_BRIEF=$otd_form->text('otd_brief',$tp->toFORM($otd_brief),100,array('size'=>'mini','class'=>'otdBrief'));
+        $OTD_DAY=$otd_form->number('otd_day',$tp->toFORM($otd_day),10,array('size'=>'mini','min'=>1,'max'=>31,'class'=>'otdManage'));
+        $OTD_MONTH=$otd_form->number('otd_month',$tp->toFORM($otd_month),10,array('size'=>'mini','min'=>1,'max'=>12,'class'=>'otdManage'));
+        $OTD_YEAR=$otd_form->text('otd_year',$tp->toFORM($otd_year),10,array('size'=>'mini','class'=>'otdManage'));
+        $OTD_FULL=$otd_form->textarea('otd_full',$tp->toFORM($otd_full),10,array('size'=>'mini','class'=>'otdManage'));
         $otd_text = "
 <form id='dataform' action='" . e_SELF . "' method='post'>
 	<div id='otdvar'>
@@ -199,32 +209,21 @@ if ($otd_obj->canSubmit())
 		<tr>
 			<td class='forumheader3'>" . OTD_A12 . "</td>
 			<td class='forumheader3'>
-				<input type='text' style='width:80%' class='tbox' name='otd_brief' value='" . $tp->toFORM($otd_brief) . "' />
+				$OTD_BRIEF
 				<input type='hidden' name='otd_id' value='$otd_id' />
 			</td>
 		</tr>
 		<tr>
 			<td class='forumheader3'>" . OTD_A17 . "</td>
 			<td class='forumheader3'>
-				<input type='text' size='5' maxlength='2' class='tbox' name='otd_day' value='" . $tp->toFORM($otd_day) . "' /> " . OTD_A13 . "&nbsp;&nbsp;&nbsp;
-				<input type='text' size='5' maxlength='2' class='tbox' name='otd_month' value='" . $tp->toFORM($otd_month) . "' /> " . OTD_A14 . "&nbsp;&nbsp;&nbsp;
-				<input type='text' size='5' maxlength='4' class='tbox' name='otd_year' value='" . $tp->toFORM($otd_year) . "' /> " . OTD_A15 . "
+			 " . OTD_A13 . " $OTD_DAY&nbsp;&nbsp;&nbsp;
+			 " . OTD_A14 . " $OTD_MONTH &nbsp;&nbsp;&nbsp;
+			 " . OTD_A15 . " $OTD_YEAR 
 			</td>
 		</tr>
 		<tr>
 			<td class='forumheader3'>" . OTD_A16 . "</td>
-			<td class='forumheader3'>";
-        $insertjs = (!$pref['wysiwyg'])?"rows='10' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);'":
-        "rows='20' style='width:100%' ";
-        $otd_full = $tp->toForm($otd_full);
-        $otd_text .= "<textarea class='tbox' id='otd_full' name='otd_full' cols='80'  style='width:95%' $insertjs>" . (strstr($otd_full, "[img]http") ? $otd_full : str_replace("[img]../", "[img]", $otd_full)) . "</textarea>";
-
-        if (!$pref['wysiwyg'])
-        {
-            $otd_text .= "<input id='helpb' class='helpbox' type='text' name='helpb' size='100' style='width:95%'/>
-			<br />" . display_help("helpb");
-        }
-        $otd_text .= "
+			<td class='forumheader3'>$OTD_FULL
 			</td>
 		</tr>
 		<tr>
@@ -282,8 +281,8 @@ if ($otd_obj->canSubmit())
 	<tr>
 		<td class='forumheader3' style='width:70%'>" . $tp->toHTML($otd_brief, false) . "</td>
 		<td class='forumheader3' style='width:30%;text-align:center;'>
-			<a href='" . e_SELF . "?edit.$otd_id.$otd_currentmonth.$otd_currentday' ><img src='" . e_IMAGE . "admin_images/edit_16.png' alt='".OTD_013."' title='".OTD_013."' style='border:0px;' /></a>&nbsp;&nbsp;
-			<a href='" . e_SELF . "?delete.$otd_id.$otd_currentmonth.$otd_currentday' ><img src='" . e_IMAGE . "admin_images/delete_16.png' alt='".OTD_014."' title='".OTD_014."' style='border:0px;' /></a></td>
+			<a href='" . e_SELF . "?edit.$otd_id.$otd_currentmonth.$otd_currentday' alt='".OTD_013."' title='".OTD_013."'><i class='fa fa-edit  fa-2x'></i></a>&nbsp;&nbsp;
+			<a href='" . e_SELF . "?delete.$otd_id.$otd_currentmonth.$otd_currentday' alt='".OTD_014."' title='".OTD_014."' ><i class='fa fa-trash fa-2x'></i></a></td>
 	</tr>";
             }
         }
