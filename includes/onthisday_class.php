@@ -67,6 +67,7 @@ class onthisday
         require_once (e_PLUGIN . 'onthisday/shortcodes/onthisday_shortcodes.php');
         $this->sc = new otdShortcode();
         $this->msg = e107::getMessage();
+       // $this->msg->setSessionId('otd');
         $this->db = e107::getDB(); // mysql class object
         $this->tp = e107::getParser(); // parser for converting to HTML and parsing templates etc.
         $this->frm = e107::getForm(); // Form element class.
@@ -415,7 +416,6 @@ class onthisday
 
         } else
         {
-
             $otd_text .= OTDLAN_DEFAULT;
         }
         if ($this->canSubmit())
@@ -436,10 +436,11 @@ class onthisday
                 $otd_row = $this->db->fetch();
                 extract($otd_row);
             }
-        }else{
-            $otd_day=$this->calDay;
-            $otd_month=$this->calMonth;
-            }
+        } else
+        {
+            $otd_day = $this->calDay;
+            $otd_month = $this->calMonth;
+        }
         $this->sc->otd_brief = $this->frm->text('otd_brief', $this->tp->toFORM($otd_brief), 200, array('size' => 'mini', 'class' => 'otdBrief'));
         $this->sc->otd_day = $this->frm->number('otd_day', $this->tp->toFORM($otd_day), 10, array(
             'size' => 'mini',
@@ -529,7 +530,7 @@ class onthisday
     function addNew($otd_currentid, $param, $otd_currentmonth, $otd_currentday)
     {
         global $e_event;
-        
+
     }
     function save()
     {
@@ -558,6 +559,7 @@ class onthisday
                     e107::getCache()->clear($this->menuCache);
                     e107::getCache()->clear($this->otdCache);
                     $this->msg->addSuccess(OTD_A59);
+                    e107::getMessage()->addSuccess(OTD_A59);
                     $edata_sn = array(
                         "user" => USERNAME,
                         "otd_brief" => $this->tp->toDB($_POST['otd_brief']),
@@ -573,21 +575,25 @@ class onthisday
                 // no changes made
                 $this->msg->addInfo(OTD_A66);
             }
-        }else{
+                  //      print_a($this->msg);
+           // print_a($_SESSION);
+
+        } else
+        {
             // add a new one
             if (!empty($_POST['otd_brief']) && !empty($_POST['otd_day']) && !empty($_POST['otd_month']))
-        {
-            // if the fields are completed
-            // check if a duplicate
-            if (!$this->db->select('onthisday', 'otd_id', 'where 
+            {
+                // if the fields are completed
+                // check if a duplicate
+                if (!$this->db->select('onthisday', 'otd_id', 'where 
             otd_day="' . (int)$_POST['otd_day'] . '" AND 
             otd_month="' . (int)$_POST['otd_month'] . '" AND 
             otd_year="' . (int)$_POST['otd_year'] . '" AND 
             otd_brief="' . $this->tp->toDB($_POST['otd_brief']) . '" AND
             otd_full="' . $this->tp->toDB($_POST['otd_full']) . '"', 'nowhere', false))
-            {
-                // Create new record ensuring not a duplicate
-                $otd_arg = "0,
+                {
+                    // Create new record ensuring not a duplicate
+                    $otd_arg = "0,
 	   '" . $this->tp->toDB($_POST['otd_brief']) . "',
 	   '" . intval($_POST['otd_day']) . "',
 	   '" . intval($_POST['otd_month']) . "',
@@ -595,47 +601,47 @@ class onthisday
 	   '" . $this->tp->toDB($_POST['otd_full']) . "',
 	   '" . USERID . "'";
 
-                if ($this->db->insert("onthisday", $otd_arg, false))
-                {
-                    // all OK so attempt to save the new record
-                    $this->msg->addSuccess(OTD_A59);
-                    e107::getCache()->clear($this->menuCache);
-                    e107::getCache()->clear($this->otdCache);
-
-                    $edata_sn = array(
-                        "user" => USERNAME,
-                        "otd_brief" => $this->tp->toDB($_POST['otd_brief']),
-                        "date" => intval($_POST['otd_day']) . ' - ' . intval($_POST['otd_month']) . ' - ' . intval($_POST['otd_year']));
-                    $e_event->trigger("onthisdaypost", $edata_sn);
-                    if (isset($gold_obj) && $gold_obj->plugin_active('onthisday') && $OTD_PREF['otd_goldamount'] > 0)
+                    if ($this->db->insert("onthisday", $otd_arg, false))
                     {
-                        $gold_param['gold_user_id'] = USERID;
-                        $gold_param['gold_who_id'] = 0;
-                        $gold_param['gold_amount'] = $OTD_PREF['otd_goldamount'];
-                        $gold_param['gold_type'] = OTD_G01;
-                        $gold_param['gold_action'] = 'credit';
-                        $gold_param['gold_plugin'] = 'onthisday';
-                        $gold_param['gold_log'] = OTD_G05 . ' : ' . $_POST['otd_brief'];
-                        $gold_param['gold_forum'] = 0;
-                        $fred = $gold_obj->gold_modify($gold_param, false);
+                        // all OK so attempt to save the new record
+                        $this->msg->addSuccess(OTD_A59);
+                        e107::getCache()->clear($this->menuCache);
+                        e107::getCache()->clear($this->otdCache);
+
+                        $edata_sn = array(
+                            "user" => USERNAME,
+                            "otd_brief" => $this->tp->toDB($_POST['otd_brief']),
+                            "date" => intval($_POST['otd_day']) . ' - ' . intval($_POST['otd_month']) . ' - ' . intval($_POST['otd_year']));
+                        $e_event->trigger("onthisdaypost", $edata_sn);
+                        if (isset($gold_obj) && $gold_obj->plugin_active('onthisday') && $OTD_PREF['otd_goldamount'] > 0)
+                        {
+                            $gold_param['gold_user_id'] = USERID;
+                            $gold_param['gold_who_id'] = 0;
+                            $gold_param['gold_amount'] = $OTD_PREF['otd_goldamount'];
+                            $gold_param['gold_type'] = OTD_G01;
+                            $gold_param['gold_action'] = 'credit';
+                            $gold_param['gold_plugin'] = 'onthisday';
+                            $gold_param['gold_log'] = OTD_G05 . ' : ' . $_POST['otd_brief'];
+                            $gold_param['gold_forum'] = 0;
+                            $fred = $gold_obj->gold_modify($gold_param, false);
+                        }
+                    } else
+                    {
+                        //failed to save the record
+                        $this->msg->addError(OTD_A63);
                     }
                 } else
                 {
-                    //failed to save the record
-                    $this->msg->addError(OTD_A63);
+                    // duplicate record
+                    $this->msg->addWarning(OTD_A61);
                 }
             } else
             {
-                // duplicate record
-                $this->msg->addWarning(OTD_A61);
+                // fields not completed
+                $this->msg->addWarning(OTD_A60);
             }
-        } else
-        {
-            // fields not completed
-            $this->msg->addWarning(OTD_A60);
-        }
 
-            }
+        }
     }
     function showRec()
     {
@@ -662,8 +668,11 @@ class onthisday
     }
     function renderMessage()
     {
-
         $retval = $this->msg->render();
         return $retval;
+    }
+    function notPermitted()
+    {
+        return $this->tp->parsetemplate($this->template->otdNotPermitted(), false, $this->sc);
     }
 }
