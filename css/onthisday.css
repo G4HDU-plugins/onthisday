@@ -4,7 +4,8 @@
     overflow-y:auto;
     }
 .otdLogoCell{
-    text-align:center;    
+    text-align:center;  
+      
 }
 .otdLogo{
     border:0px;
@@ -23,12 +24,24 @@
     margin-right:auto;
 }
 .otdLink{
-    font-size: 16px;
-    border:1px solid;
-    padding:1px 4px;
-    margin:2px;
+   
+    border:0px solid;
+   padding:5px 5px 1px 5px;
+    margin:2px 4px;
 }
 .otdYear{
     width:35px;
     display: inline-block;
     }
+.otdManage{
+    width:100px;
+    display: inline-block;
+    }
+.otdBrief{
+      width:85%;
+    display: inline-block;  
+    
+    }
+.otdError{
+        border:2px solid red !important;
+}

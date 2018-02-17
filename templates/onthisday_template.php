@@ -21,10 +21,7 @@ class onthisday_template
     function otdDayHead()
     {
         $retval = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption" >{OTD_DAY_TITLE}</td>
-	</tr>';
+<table class="fborder" style="' . USER_WIDTH . '">';
         if (defined('OTD_LOGO'))
         {
             $retval .= '
@@ -34,7 +31,7 @@ class onthisday_template
         </td>
 	</tr>';
         }
-                $retval .= '
+        $retval .= '
 
 	<tr>
    		<td class="forumheader3" >{OTD_PREVIOUSMONTH}{OTD_PREVIOUSDAY}{OTD_TODAY}{OTD_NEXTDAY}{OTD_NEXTMONTH}</td>
@@ -58,20 +55,18 @@ class onthisday_template
 
     function otdDayFoot()
     {
-        if (1==1||$this->showAll == 1)
-        {
+
             $retval = '
+            <!--
 	<tr>
 		<td class="forumheader3 otdCalendar" >{OTD_CALENDAR}</td>
-	</tr>';
-        }
-        $retval .= '
+	</tr>
     <tr>
 		<td class="forumheader3">{OTD_MANAGE}</td>
 	</tr>
 	<tr>
 		<td class="fcaption">&nbsp;</td>
-	</tr>
+	</tr>-->
 </table>';
         return $retval;
     }
@@ -85,13 +80,14 @@ class onthisday_template
 	<tr>
 		<td class="forumheader3">' . OTDLAN_DEFAULT . '</td>
 	</tr>
-		<tr>
+	<!--<tr>
 		<td class="forumheader3">{OTD_CALENDAR}</td>
 	</tr>
+    
     <tr>
 		<td class="forumheader3">{OTD_MANAGE}</td>
 	</tr>
-	<tr>
+-->	<tr>
 		<td class="fcaption">&nbsp;</td>
 	</tr>
 </table>';
@@ -113,155 +109,90 @@ class onthisday_template
 </table>';
         return $retval;
     }
-}
+    function editEntry()
+    {
+        $retval = "
+<table class='fborder' style='" . USER_WIDTH . "'>
+	<tr>
+		<td colspan='2' class='forumheader2'>" . OTD_A11 . " {OTD_CURRENTDAY} {OTD_CURRENTMONTH} </td>
+	</tr>
+	<tr>
+		<td class='forumheader3'>" . OTD_A12 . "</td>
+		<td class='forumheader3'>
+			{OTD_BRIEF}
+		</td>
+	</tr>
+	<tr>
+		<td class='forumheader3'>" . OTD_A17 . "</td>
+		<td class='forumheader3'>
+		 " . OTD_A13 . " {OTD_DAY}&nbsp;&nbsp;&nbsp;
+		 " . OTD_A14 . " {OTD_MONTH} &nbsp;&nbsp;&nbsp;
+		 " . OTD_A15 . " {OTD_EDYEAR} 
+		</td>
+	</tr>
+	<tr>
+		<td class='forumheader3'>" . OTD_A16 . "</td>
+		<td class='forumheader3'>{OTD_FULL}</td>
+	</tr>
+	<tr>
+		<td class='forumheader3' colspan='2'>
+			{OTD_SUBMIT}
+		</td>
+	</tr>
+   	<tr>
+		<td class='fcaption' colspan='2'>&nbsp;</td>
+	</tr>
+</table>";
+        return $retval;
+    }
+    function showHead()
+    {
+        $otd_text .= "
+<table class='fborder' style='" . USER_WIDTH . "'>
+	<tr>
+		<td class='forumheader3'  style='width:100%;text-align:center;'>{OTD_CALENDAR}</td>
+	</tr>
+</table>";
 
+        $otd_selmonth = $otd_currentmonth;
+        $otd_text .= "
+<table class='fborder' style='" . USER_WIDTH . "'>
+	<tr>
+		<td class='fcaption' colspan='2'>" . OTD_A24 . " - <strong>$this->calDay " . $otd_currentmonths[$otd_currentmonth] . "</strong></td>
+	</tr>";
 
-// ********************************************************************************************
-// *
-// * Template area for showing an days events
-// *
-// ********************************************************************************************
-if ($OTD_PREF['otd_showall'] == 1)
-{
-    // showall on so we have a calenday
-    if (!isset($OTD_DAY_HEAD))
+        return $otd_text;
+    }
+    function showRow()
     {
-        $OTD_DAY_HEAD = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption" >{OTD_DAY_TITLE}</td>
-	</tr>';
+        $row = $this->row;
+        $otd_text .= "
+	<tr>
+		<td class='forumheader3' style='width:80%'>{OTD_TITLE}</td>
+		<td class='forumheader3' style='width:20%;text-align:center;'>
+			{OTD_EDIT}&nbsp;&nbsp;{OTD_DELETE}
+        </td>
+	</tr>";
+        return $otd_text;
+    }
+    function showNoRow()
+    {
+        $otd_text .= "
+	<tr>
+		<td class='forumheader3' colspan='2'>" . OTD_A25 . "</td>
+	</tr>";
 
-        if (defined('OTD_LOGO'))
-        {
-            $OTD_DAY_HEAD .= '
-	   	<tr>
-   		<td class="forumheader2"  style="text-align:center;"  ><img src="' . OTD_LOGO . '" alt="logo" title="logo" style="border:0px" /></td>
-	</tr>';
-        }
     }
-    if (!isset($OTD_DAY_DETAIL))
+    function showFoot()
     {
-        $OTD_DAY_DETAIL = '
+        $retval .= "
 	<tr>
-		<td class="forumheader3">{OTD_YEAR} - <b>{OTD_TITLE}</b><br />{OTD_BODY}</td>
-	</tr>';
-    }
-    if (!isset($OTD_DAY_FOOTER))
-    {
-        $OTD_DAY_FOOTER = '
-	<tr>
-		<td class="forumheader3" style="width:100%;text-align:center;margin-left:auto;margin-right:auto;" >{OTD_CALENDAR}</td>
-	</tr>
-    <tr>
-		<td class="forumheader3">{OTD_MANAGE}</td>
+		<td class='forumheader3' colspan='2'>{OTD_ADDNEW}</td>
 	</tr>
 	<tr>
-		<td class="fcaption">&nbsp;</td>
+		<td class='fcaption' colspan='2'>&nbsp;</td>
 	</tr>
-</table>';
-    }
-
-    if (!isset($OTD_DAY_NOREC))
-    {
-        $OTD_DAY_NOREC = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>
-	<tr>
-		<td class="forumheader3">' . OTDLAN_DEFAULT . '</td>
-	</tr>
-		<tr>
-		<td class="forumheader3">{OTD_CALENDAR}</td>
-	</tr>
-    <tr>
-		<td class="forumheader3">{OTD_MANAGE}</td>
-	</tr>
-	<tr>
-		<td class="fcaption">&nbsp;</td>
-	</tr>
-</table>';
-    }
-    if (!isset($OTD_DAY_NOTPERMITTED))
-    {
-        $OTD_DAY_NOTPERMITTED = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>
-	<tr>
-		<td class="forumheader3">' . OTD_01 . '</td>
-	</tr>
-	<tr>
-		<td class="fcaption">&nbsp;</td>
-	</tr>
-</table>';
-    }
-} else
-{
-    if (!isset($OTD_DAY_HEAD))
-    {
-        $OTD_DAY_HEAD = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>';
-        if (defined('OTD_LOGO'))
-        {
-            $OTD_DAY_HEAD .= '
-	   	<tr>
-   		<td class="forumheader2"  style="text-align:center;"  ><img src="' . OTD_LOGO . '" alt="logo" title="logo" style="border:0px" /></td>
-	</tr>';
-        }
-    }
-    if (!isset($OTD_DAY_DETAIL))
-    {
-        $OTD_DAY_DETAIL = '
-	<tr>
-		<td class="forumheader3">{OTD_YEAR} - <b>{OTD_TITLE}</b><br />{OTD_BODY}</td>
-	</tr>';
-    }
-    if (!isset($OTD_DAY_FOOTER))
-    {
-        $OTD_DAY_FOOTER = '
-    	<tr>
-		<td class="forumheader3" style="width:100%;text-align:center;" >{OTD_MANAGE}</td>
-	</tr>
-	<tr>
-		<td class="fcaption">&nbsp;</td>
-	</tr>
-</table>';
-    }
-
-    if (!isset($OTD_DAY_NOREC))
-    {
-        $OTD_DAY_NOREC = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>
-	<tr>
-		<td class="forumheader3">' . OTDLAN_DEFAULT . '</td>
-	</tr>
-	<tr>
-		<td class="fcaption">&nbsp;</td>
-	</tr>
-</table>';
-    }
-    if (!isset($OTD_DAY_NOTPERMITTED))
-    {
-        $OTD_DAY_NOTPERMITTED = '
-<table class="fborder" style="' . USER_WIDTH . '">
-   	<tr>
-   		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>
-	<tr>
-		<td class="forumheader3">' . OTD_01 . '</td>
-	</tr>
-	<tr>
-		<td class="fcaption">&nbsp;</td>
-	</tr>
-</table>';
+</table>";
+return $retval;
     }
 }

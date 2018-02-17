@@ -128,6 +128,9 @@ define(OTD_A61, "An identical event exists");
 define(OTD_A62, "On this Day");
 define(OTD_A63, "Unable to create entry");
 define(OTD_A64, "Unable to save entry");
+define(OTD_A66, "Not saved as No Changes Made");
+define(OTD_A67, "Entry Deleted");
+define(OTD_A68, "Unable to Delete");
 
 define(OTD_001, "Manage Entries");
 define(OTD_002, "On This Day Menu");
