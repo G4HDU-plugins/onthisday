@@ -32,7 +32,6 @@ class onthisday_template
 	</tr>';
         }
         $retval .= '
-
 	<tr>
    		<td class="forumheader3" >{OTD_PREVIOUSMONTH}{OTD_PREVIOUSDAY}{OTD_TODAY}{OTD_NEXTDAY}{OTD_NEXTMONTH}</td>
 	</tr>

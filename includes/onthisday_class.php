@@ -67,7 +67,7 @@ class onthisday
         require_once (e_PLUGIN . 'onthisday/shortcodes/onthisday_shortcodes.php');
         $this->sc = new otdShortcode();
         $this->msg = e107::getMessage();
-       // $this->msg->setSessionId('otd');
+        // $this->msg->setSessionId('otd');
         $this->db = e107::getDB(); // mysql class object
         $this->tp = e107::getParser(); // parser for converting to HTML and parsing templates etc.
         $this->frm = e107::getForm(); // Form element class.
@@ -404,16 +404,24 @@ class onthisday
         // include_lan(e_PLUGIN . "onthisday/languages/" . e_LANGUAGE . ".php");
         $otd_thisday = date("d");
         $otd_thismonth = date("m");
-        $otd_text = "<div id='otdMenuContainer' style='min-height:50px;max-height:" . $this->prefs['otd_maxheight'] . "px;'><ul>";
+
         if ($this->db->select("onthisday", "*", "where otd_day='$otd_thisday' and otd_month='$otd_thismonth' order by otd_year", "nowhere", false))
         {
+            $otd_text = "
+<div id='otdMenuContainer' style='min-height:50px;max-height:" . $this->prefs['otd_maxheight'] . "px;'>
+    <ul>";
             while ($row = $this->db->db_Fetch())
             {
-                $otd_text .= "<li>" . $this->tp->html_truncate($this->tp->toHTML($row['otd_brief'], false, "no_make_clickable emotes_off"), $this->prefs['otd_maxlength'], OTD_MORE) . "</li>";
+                $otd_text .= "
+        <li>" . $this->tp->html_truncate($this->tp->toHTML($row['otd_brief'], false, "no_make_clickable emotes_off"), $this->prefs['otd_maxlength'], OTD_MORE) . "</li>";
             }
-            $otd_text .= "</ul></div>";
-            $otd_text .= "<div style='text-align:center'><a href='" . e_PLUGIN . "onthisday/index.php'>" . OTD_015 . "</a></div>";
-
+            $otd_text .= "
+    </ul>
+</div>";
+            $otd_text .= "
+<div style='text-align:center'>
+    <a href='" . e_PLUGIN . "onthisday/index.php'>" . OTD_015 . "</a>
+</div>";
         } else
         {
             $otd_text .= OTDLAN_DEFAULT;
@@ -421,7 +429,10 @@ class onthisday
         if ($this->canSubmit())
         {
             // allowed to submit so display link
-            $otd_text .= "<div style='text-align:center;'><a href='" . e_PLUGIN . "onthisday/index.php?action=manage&calMonth={$this->month}&calDay={$this->day}'>" . OTD_001 . "</a></div>";
+            $otd_text .= "
+<div style='text-align:center;'>
+    <a href='" . e_PLUGIN . "onthisday/index.php?action=manage&calMonth={$this->month}&calDay={$this->day}'>" . OTD_001 . "</a>
+</div>";
         }
 
         $cache_data = $this->ns->tablerender(OTDLAN_CAP, $otd_text, 'otdmenu', true); // Render the menu
@@ -575,8 +586,8 @@ class onthisday
                 // no changes made
                 $this->msg->addInfo(OTD_A66);
             }
-                  //      print_a($this->msg);
-           // print_a($_SESSION);
+            //      print_a($this->msg);
+            // print_a($_SESSION);
 
         } else
         {
