@@ -217,21 +217,23 @@ class onthisday
             // so create the cache entry
             $qry = "SELECT * FROM #onthisday 
                 where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,otd_brief";
-            $text = $this->tp->parseTemplate($this->template->otdDayHead(), true, $this->sc);
-            $result = $this->db->gen($qry, false);
+             $result = $this->db->gen($qry, false);
             if ($result)
             {
+                $text = $this->tp->parseTemplate($this->template->otdDayHead(), true, $this->sc);
+           
                 while ($row = $this->db->fetch())
                 {
                     $this->sc->row = $row;
                     $text .= $this->tp->parseTemplate($this->template->otdDayDetail(), true, $this->sc);
                 }
+                $text .= $this->tp->parseTemplate($this->template->otdDayFoot(), true, $this->sc);
+
             } else
             {
                 $text .= $this->tp->parseTemplate($this->template->otdNoRec(), true, $this->sc);
             }
-            $text .= $this->tp->parseTemplate($this->template->otdDayFoot(), true, $this->sc);
-
+            
             $res = e107::getCache()->set($this->otdCache, $text); // and save it in the cache
         }
         return $text;
@@ -401,7 +403,6 @@ class onthisday
     }
     function showMenu()
     {
-        // include_lan(e_PLUGIN . "onthisday/languages/" . e_LANGUAGE . ".php");
         $otd_thisday = date("d");
         $otd_thismonth = date("m");
 

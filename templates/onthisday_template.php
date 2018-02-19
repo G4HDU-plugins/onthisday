@@ -75,7 +75,17 @@ class onthisday_template
 <table class="fborder" style="' . USER_WIDTH . '">
     <tr>
    		<td class="fcaption">{OTD_DAY_TITLE}</td>
-	</tr>
+	</tr>';
+            if (defined('OTD_LOGO'))
+        {
+            $retval .= '
+    <tr>
+        <td class="forumheader2 otdLogoCell" >
+            <img src="' . OTD_LOGO . '" class="otdLogo" alt="logo" title="logo" />
+        </td>
+	</tr>';
+        }
+        $retval.='
 	<tr>
 		<td class="forumheader3">' . OTDLAN_DEFAULT . '</td>
 	</tr>
