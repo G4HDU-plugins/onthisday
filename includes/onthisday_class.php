@@ -196,6 +196,9 @@ class onthisday
             case 'manage':
                 $text = $this->showRec();
                 break;
+            case 'view':
+                $text=$this->view();
+            break;                                                    
             default:
                 $this->action = 'day';
         }
@@ -686,5 +689,37 @@ class onthisday
     function notPermitted()
     {
         return $this->tp->parsetemplate($this->template->otdNotPermitted(), false, $this->sc);
+    }
+    function view()
+    {
+        if ($this->db->select("onthisday", "*", "WHERE otd_id='{$this->id}'", "", false))
+        {
+            $otd_row = $this->db->fetch();
+            extract($otd_row);
+            $otd_monthsel = $otd_month - 1;
+
+            $OTD_HOME = $this->frm->submit('cancok', OTD_A28);
+            $otd_text = "
+<form id='dataform' action='" . e_SELF . "' method='post'>
+	<div id='otdvar'>
+		<!--<input type='hidden' name='action' value='day' />-->
+		<input type='hidden' name='id' value='{$this->id}' />
+		<input type='hidden' name='calMonth' value='{$this->calMonth}' />
+		<input type='hidden' name='calDay' value='{$this->calDay}' />
+	</div>
+    <table class='fborder' style='" . USER_WIDTH . "' >
+    	<tr>
+            <td class='fcaption'>" . OTD_016 . "</td>
+        </tr>
+    	<tr>
+            <td class='forumheader3'><strong>" . $this->tp->toHTML($otd_brief, false) . "</strong><br />
+    	" . OTD_A31 . " $otd_day - " . OTD_A32 . " " . $this->monthList[$otd_month] . " - " . OTD_A33 . " $otd_year
+    	<br /><br />{$OTD_HOME}
+    	   </td>
+        </tr>
+    </table>
+</form>";
+        }
+        return $otd_text;
     }
 }

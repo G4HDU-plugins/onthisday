@@ -147,6 +147,7 @@ define(OTD_012, "Occurs on");
 define(OTD_013, "Edit");
 define(OTD_014, "Delete");
 define(OTD_015, "Full Details");
+define(OTD_016, "View Record");
 
 define(OTD_P01, "Configure On This Day Menu");
 define(OTD_P02, "Displays events that happened today.");

@@ -61,35 +61,7 @@ class onthisday_search extends e_search // include plugin-folder in the name.
      * Optional - Advanced Where
      * @param $parm - data returned from $_GET (ie. advanced fields included. in this case 'date' and 'author' )
      */
-    /*
-    * function where($parm='')
-    * {
-    * $tp = e107::getParser();
 
-    * $qry = " find_in_set(x.faq_info_class,'".USERCLASS_LIST."') AND ";
-    * 
-    * if (vartrue($parm['time']) && is_numeric($parm['time'])) 
-    * {
-    * $qry .= " cb_datestamp ".($parm['on'] == 'new' ? '>=' : '<=')." '".(time() - $parm['time'])."' AND";
-    * }
-
-    * if (vartrue($parm['author'])) 
-    * {
-    * $qry .= " cb_nick LIKE '%".$tp -> toDB($parm['author'])."%' AND";
-    * }
-    * 
-    * return $qry;
-    * }
-    */
 
 }
-// $search_info[]=array( 'sfile' => e_PLUGIN.'faq/search.php', 'qtype' => 'FAQ', 'refpage' => 'faq.php');
-/*
-* include_lan(e_PLUGIN . "onthisday_menu/languages/" . e_LANGUAGE . ".php");
 
-* $otd_title = OTD_A62;
-* $search_info[] = array(
-* 'sfile' => e_PLUGIN . 'onthisday_menu/search/search.php',
-* 'qtype' => $otd_title,
-* 'refpage' => 'index.php');
-*/
