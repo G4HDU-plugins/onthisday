@@ -25,15 +25,16 @@ if (!is_object($otd_obj))
 require_once (HEADERF);
 if (!$otd_obj->canView())
 {
-    $text = $otd_obj->renderMessage();
+    // $text = $otd_obj->renderMessage();
     $text .= $otd_obj->notPermitted();
 } else
 {
-  // error_reporting(E_ALL);
-   //print_a($_SESSION);
-        $text = $otd_obj->renderMessage();
-    $text .= $otd_obj->runPage();
+    // error_reporting(E_ALL);
+    //print_a($_SESSION);
 
+    $page .= $otd_obj->runPage();
+    $render = $otd_obj->renderMessage();
+    $text = $render . $page;
 }
 $ns->tablerender(e_PAGETITLE, $text); // Render the page
 require_once (FOOTERF);

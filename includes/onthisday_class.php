@@ -67,7 +67,6 @@ class onthisday
         require_once (e_PLUGIN . 'onthisday/shortcodes/onthisday_shortcodes.php');
         $this->sc = new otdShortcode();
         $this->msg = e107::getMessage();
-        // $this->msg->setSessionId('otd');
         $this->db = e107::getDB(); // mysql class object
         $this->tp = e107::getParser(); // parser for converting to HTML and parsing templates etc.
         $this->frm = e107::getForm(); // Form element class.
@@ -197,8 +196,8 @@ class onthisday
                 $text = $this->showRec();
                 break;
             case 'view':
-                $text=$this->view();
-            break;                                                    
+                $text = $this->view();
+                break;
             default:
                 $this->action = 'day';
         }
@@ -220,11 +219,11 @@ class onthisday
             // so create the cache entry
             $qry = "SELECT * FROM #onthisday 
                 where otd_month='{$this->month}' AND otd_day='{$this->day}' ORDER BY otd_year,otd_brief";
-             $result = $this->db->gen($qry, false);
+            $result = $this->db->gen($qry, false);
             if ($result)
             {
                 $text = $this->tp->parseTemplate($this->template->otdDayHead(), true, $this->sc);
-           
+
                 while ($row = $this->db->fetch())
                 {
                     $this->sc->row = $row;
@@ -236,7 +235,7 @@ class onthisday
             {
                 $text .= $this->tp->parseTemplate($this->template->otdNoRec(), true, $this->sc);
             }
-            
+
             $res = e107::getCache()->set($this->otdCache, $text); // and save it in the cache
         }
         return $text;
@@ -574,7 +573,7 @@ class onthisday
                     e107::getCache()->clear($this->menuCache);
                     e107::getCache()->clear($this->otdCache);
                     $this->msg->addSuccess(OTD_A59);
-                    e107::getMessage()->addSuccess(OTD_A59);
+                    // e107::getMessage()->addSuccess(OTD_A59);
                     $edata_sn = array(
                         "user" => USERNAME,
                         "otd_brief" => $this->tp->toDB($_POST['otd_brief']),
@@ -657,6 +656,8 @@ class onthisday
             }
 
         }
+        //echo $this->msg->render();
+
     }
     function showRec()
     {
@@ -683,6 +684,8 @@ class onthisday
     }
     function renderMessage()
     {
+
+     //   print_a($_SESSION);
         $retval = $this->msg->render();
         return $retval;
     }

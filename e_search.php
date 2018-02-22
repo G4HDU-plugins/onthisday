@@ -46,11 +46,11 @@ class onthisday_search extends e_search // include plugin-folder in the name.
     {
         $res = array();
 
-        $res['link'] = $url = e107::url('onthisday', 'category', $row); // e_PLUGIN . "faq/faq.php?cat." . $cat_id . "." . $link_id . "";
-        $res['pre_title'] =' ';// $row['otd_brief'] ? $row['otd_brief'] . ' | ' : "";
+        $res['link'] = $url = e107::url('onthisday', 'view', $row); // e_PLUGIN . "faq/faq.php?cat." . $cat_id . "." . $link_id . "";
+        $res['pre_title'] ='Title ';// $row['otd_brief'] ? $row['otd_brief'] . ' | ' : "";
         $res['title'] = $row['otd_brief'];
-        $res['summary'] = substr($row['otd_full'], 0, 100) . "....  ";
-        $res['detail'] = e107::getParser()->toDate($row['faq_datestamp'], 'long');
+        $res['summary'] = substr($row['otd_full'], 0, 100) . " ....  ";
+        $res['detail'] = $row['otd_year'].$row['otd_month'].$row['otd_day'];
 
         return $res;
 
