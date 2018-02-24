@@ -693,6 +693,7 @@ class onthisday
     {
         return $this->tp->parsetemplate($this->template->otdNotPermitted(), false, $this->sc);
     }
+    //zztp00472062
     function view()
     {
         if ($this->db->select("onthisday", "*", "WHERE otd_id='{$this->id}'", "", false))
