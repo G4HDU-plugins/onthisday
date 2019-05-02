@@ -40,14 +40,14 @@ class onthisday_url // plugin-folder + '_url'
 
         $config['view'] = array(
             'alias' => 'onthisday',
-            'regex' => '^onthisday/?$', // matched against url, and if true, redirected to 'redirect' below.
-            'sef' => 'onthisday', // used by e107::url(); to create a url from the db table.
+            'regex' => '^{alias}/?$', // matched against url, and if true, redirected to 'redirect' below.
+            'sef' => '{alias}', // used by e107::url(); to create a url from the db table.
             'redirect' => '{e_PLUGIN}onthisday/index.php?action=viiew&id=$1', // file-path of what to load when the regex returns true.
 
             );
         $config['search'] = array(
             'alias' => 'onthisday',
-            'regex' => '^{alias}/\otd_id=(.*)$', // matched against url, and if true, redirected to 'redirect' below.
+            'regex' => '^{alias}/otd_id=(.*)$', // matched against url, and if true, redirected to 'redirect' below.
             'sef' => '{alias}/view-$1', // used by e107::url(); to create a url from the db table.
             'redirect' => '{e_PLUGIN}onthisday/index.php?action=view&id=$1', // file-path of what to load when the regex returns true.
 
